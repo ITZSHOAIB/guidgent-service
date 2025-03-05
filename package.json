@@ -1,0 +1,40 @@
+{
+  "name": "guidgent-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index.js",
+    "dev": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/core": "^0.3.40",
+    "@langchain/langgraph": "^0.2.48",
+    "@langchain/mistralai": "^0.2.0",
+    "@langchain/openai": "^0.4.4",
+    "@llamaindex/core": "^0.5.5",
+    "@llamaindex/groq": "^0.0.56",
+    "@llamaindex/huggingface": "^0.0.41",
+    "@llamaindex/mistral": "^0.0.10",
+    "@llamaindex/ollama": "^0.0.45",
+    "@llamaindex/readers": "^2.0.5",
+    "@mistralai/mistralai": "^1.5.0",
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "llamaindex": "^0.9.6",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.13.4",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  }
+}
