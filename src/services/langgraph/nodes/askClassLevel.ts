@@ -5,6 +5,7 @@ export async function askClassLevel(
   state: typeof graphState.State,
   sendData: (data: SendDataType) => void
 ) {
+  console.log("Node Visited: [askClassLevel]");
   if (sendData) {
     sendData({
       type: "chat",

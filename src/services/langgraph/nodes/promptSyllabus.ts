@@ -9,7 +9,8 @@ export async function promptSyllabus(
   state: typeof graphState.State,
   sendData: (data: SendDataType) => void
 ) {
-  console.log("[promptSyllabus] called");
+  console.log("Node Visited: [promptSyllabus]");
+
   const messages = state.messages;
   const humanMessages = messages.filter((msg) => msg.getType() === "human");
 

@@ -4,9 +4,11 @@ import { fetchClassLevelPrompt } from "../prompts/fetchClassLevel.prompt";
 import { model } from "../models";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { Command } from "@langchain/langgraph";
+import { GRAPH_NODES_KEYS } from ".";
 
 export async function fetchClassLevel(state: typeof graphState.State) {
-  console.log("[fetchClassLevel] called");
+  console.log("Node Visited: [fetchClassLevel]");
+
   const messages = state.messages;
 
   const prompt = ChatPromptTemplate.fromMessages([
@@ -26,6 +28,9 @@ export async function fetchClassLevel(state: typeof graphState.State) {
     update: {
       classLevel,
     },
-    goto: classLevel === -1 ? "askClassLevel" : "promptSyllabus",
+    goto:
+      classLevel === -1
+        ? GRAPH_NODES_KEYS.askClassLevel
+        : GRAPH_NODES_KEYS.evaluateIntent,
   });
 }

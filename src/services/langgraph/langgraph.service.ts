@@ -8,21 +8,31 @@ export type SendDataType = {
   text?: string;
 };
 
-const { askClassLevel, fetchClassLevel, promptSyllabus, entryRouter } =
-  GRAPH_NODES;
+const {
+  askClassLevel,
+  fetchClassLevel,
+  promptSyllabus,
+  entryRouter,
+  evaluateIntent,
+  clarifyIntent,
+} = GRAPH_NODES;
 
 // In-memory store
 const memory = new Map<string, typeof graphState.State>();
 
 const graph = new StateGraph(graphState)
   .addNode(GRAPH_NODES_KEYS.fetchClassLevel, fetchClassLevel, {
-    ends: [GRAPH_NODES_KEYS.askClassLevel, GRAPH_NODES_KEYS.promptSyllabus],
+    ends: [GRAPH_NODES_KEYS.askClassLevel, GRAPH_NODES_KEYS.evaluateIntent],
   })
   .addNode(GRAPH_NODES_KEYS.askClassLevel, (state) =>
     askClassLevel(state, globalSendData)
   )
   .addNode(GRAPH_NODES_KEYS.promptSyllabus, (state) =>
     promptSyllabus(state, globalSendData)
+  )
+  .addNode(GRAPH_NODES_KEYS.evaluateIntent, evaluateIntent)
+  .addNode(GRAPH_NODES_KEYS.clarifyIntent, (state) =>
+    clarifyIntent(state, globalSendData)
   )
   .addConditionalEdges(START, entryRouter)
   .compile();

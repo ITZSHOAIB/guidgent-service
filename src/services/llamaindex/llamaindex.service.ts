@@ -33,7 +33,7 @@ export const initializeLlamaindex = async () => {
   syllabusIndex = index;
 };
 
-export const querySyllabus = async (query: string) => {
+export const querySyllabus = async (query: string, stream = true) => {
   await initializeLlamaindex();
 
   if (!syllabusIndex) {
@@ -41,10 +41,14 @@ export const querySyllabus = async (query: string) => {
   }
 
   const queryEngine = syllabusIndex.asQueryEngine();
-  const response = await queryEngine.query({
-    query,
-    stream: true,
-  });
+
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  let response: any;
+  if (stream) {
+    response = await queryEngine.query({ query, stream: true });
+  } else {
+    response = await queryEngine.query({ query });
+  }
 
   return response;
 };
