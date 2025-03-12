@@ -5,6 +5,7 @@ import { model } from "../models";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { clarifyIntentPrompt } from "../prompts/clarifyIntent.prompt";
 import { AIMessage } from "@langchain/core/messages";
+import { querySyllabus } from "../../llamaindex/llamaindex.service";
 
 export async function clarifyIntent(
   state: typeof graphState.State,
@@ -17,6 +18,11 @@ export async function clarifyIntent(
   );
   const lastMessage = humanMessages[humanMessages.length - 1].content;
 
+  const retrievedSyllabusChunks = await querySyllabus(
+    lastMessage.toString(),
+    false
+  );
+
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", clarifyIntentPrompt()],
     ["human", "{message}"],
@@ -27,6 +33,7 @@ export async function clarifyIntent(
   for await (const chunk of await chain.stream({
     classLevel: state.classLevel,
     message: lastMessage,
+    retrievedSyllabusChunks,
   })) {
     fullResponse += chunk;
     sendData({ type: "chat", text: chunk });
