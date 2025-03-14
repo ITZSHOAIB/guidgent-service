@@ -1,10 +1,10 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import type { graphState } from "../graphState";
-import { model } from "../models";
+import type { graphState } from "../graphState.js";
+import { model } from "../models.js";
 import { StringOutputParser } from "@langchain/core/output_parsers";
-import { clarifyIntentPrompt } from "../prompts/clarifyIntent.prompt";
+import { clarifyIntentPrompt } from "../prompts/clarifyIntent.prompt.js";
 import { AIMessage } from "@langchain/core/messages";
-import { querySyllabus } from "../../llamaindex/llamaindex.service";
+import { querySyllabus } from "../../llamaindex/llamaindex.service.js";
 import type { LangGraphRunnableConfig } from "@langchain/langgraph";
 
 export async function clarifyIntent(

@@ -1,8 +1,13 @@
 import express from "express";
-import agentRoute from "./agent.route";
+import { invokeGraph } from "../../services/langgraph/langgraph.service.js";
+import { AgenticExpress } from "agentic-express";
 
 const router = express.Router();
 
-router.use("/agent", agentRoute);
+const agenticExpress = new AgenticExpress({
+  graphStream: invokeGraph,
+});
+
+router.use(await agenticExpress.setup());
 
 export default router;

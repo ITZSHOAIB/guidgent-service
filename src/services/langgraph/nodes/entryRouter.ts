@@ -1,5 +1,5 @@
-import { GRAPH_NODES_KEYS } from ".";
-import type { graphState } from "../graphState";
+import { GRAPH_NODES_KEYS } from "./index.js";
+import type { graphState } from "../graphState.js";
 
 export async function entryRouter(state: typeof graphState.State) {
   console.log("Node Visited: [entryRouter]");

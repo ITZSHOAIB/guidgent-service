@@ -1,10 +1,10 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import type { graphState } from "../graphState";
-import { evaluateIntentPrompt } from "../prompts/evaluateIntent.prompt";
-import { model } from "../models";
+import type { graphState } from "../graphState.js";
+import { evaluateIntentPrompt } from "../prompts/evaluateIntent.prompt.js";
+import { model } from "../models.js";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { Command, END } from "@langchain/langgraph";
-import { GRAPH_NODES_KEYS } from ".";
+import { GRAPH_NODES_KEYS } from "./index.js";
 
 export async function evaluateIntent(state: typeof graphState.State) {
   console.log("Node Visited: [evaluateIntent]");

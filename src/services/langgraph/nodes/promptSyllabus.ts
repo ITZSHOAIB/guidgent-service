@@ -1,8 +1,7 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import type { graphState } from "../graphState";
-import { dispatchCustomEvent } from "@langchain/core/callbacks/dispatch";
-import { promptSyllabusPrompt } from "../prompts/promptSyllabus.prompt";
-import { querySyllabus } from "../../llamaindex/llamaindex.service";
+import type { graphState } from "../graphState.js";
+import { promptSyllabusPrompt } from "../prompts/promptSyllabus.prompt.js";
+import { querySyllabus } from "../../llamaindex/llamaindex.service.js";
 import { AIMessage } from "@langchain/core/messages";
 import type { LangGraphRunnableConfig } from "@langchain/langgraph";
 

@@ -1,5 +1,7 @@
 {
   "watch": ["src"],
   "ext": "ts",
-  "exec": "npx @dotenvx/dotenvx run -- ts-node src/index.ts"
+  "execMap": {
+    "ts": "npx @dotenvx/dotenvx run -- node --no-warnings=ExperimentalWarning --loader ts-node/esm"
+  }
 }

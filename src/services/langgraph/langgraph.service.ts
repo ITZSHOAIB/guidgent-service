@@ -5,8 +5,8 @@ import {
   StateGraph,
 } from "@langchain/langgraph";
 import { HumanMessage } from "@langchain/core/messages";
-import { graphState } from "./graphState";
-import { GRAPH_NODES, GRAPH_NODES_KEYS } from "./nodes";
+import { graphState } from "./graphState.js";
+import { GRAPH_NODES, GRAPH_NODES_KEYS } from "./nodes/index.js";
 
 const {
   askClassLevel,
@@ -47,7 +47,6 @@ export async function* invokeGraph(prompt: string) {
     streamMode: "custom",
     ...config,
   })) {
-    console.log("Chunk", chunk);
     yield chunk;
   }
 }

@@ -1,4 +1,4 @@
-import { MistralAI } from "../mistral-ai/mistralai.service";
+import { MistralAI } from "../mistral-ai/mistralai.service.js";
 import { Settings, VectorStoreIndex } from "llamaindex";
 import { PDFReader } from "@llamaindex/readers/pdf";
 import path from "node:path";
@@ -6,6 +6,11 @@ import {
   HuggingFaceEmbedding,
   HuggingFaceEmbeddingModelType,
 } from "@llamaindex/huggingface";
+import { fileURLToPath } from "node:url";
+
+// Create __dirname equivalent for ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 Settings.embedModel = new HuggingFaceEmbedding({
   modelType: HuggingFaceEmbeddingModelType.XENOVA_ALL_MINILM_L6_V2,

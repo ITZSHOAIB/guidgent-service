@@ -1,5 +1,4 @@
-import { AIMessage } from "@langchain/core/messages";
-import type { graphState } from "../graphState";
+import type { graphState } from "../graphState.js";
 import type { LangGraphRunnableConfig } from "@langchain/langgraph";
 
 export async function askClassLevel(

@@ -1,9 +1,9 @@
-import { askClassLevel } from "./askClassLevel";
-import { fetchClassLevel } from "./fetchClassLevel";
-import { promptSyllabus } from "./promptSyllabus";
-import { entryRouter } from "./entryRouter";
-import { evaluateIntent } from "./evaluateIntent";
-import { clarifyIntent } from "./clarifyIntent";
+import { askClassLevel } from "./askClassLevel.js";
+import { fetchClassLevel } from "./fetchClassLevel.js";
+import { promptSyllabus } from "./promptSyllabus.js";
+import { entryRouter } from "./entryRouter.js";
+import { evaluateIntent } from "./evaluateIntent.js";
+import { clarifyIntent } from "./clarifyIntent.js";
 
 const GRAPH_NODES = {
   askClassLevel,

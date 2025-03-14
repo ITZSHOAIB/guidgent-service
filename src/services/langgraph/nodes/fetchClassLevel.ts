@@ -1,10 +1,10 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
-import type { graphState } from "../graphState";
-import { fetchClassLevelPrompt } from "../prompts/fetchClassLevel.prompt";
-import { model } from "../models";
+import type { graphState } from "../graphState.js";
+import { fetchClassLevelPrompt } from "../prompts/fetchClassLevel.prompt.js";
+import { model } from "../models.js";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { Command } from "@langchain/langgraph";
-import { GRAPH_NODES_KEYS } from ".";
+import { GRAPH_NODES_KEYS } from "./index.js";
 
 export async function fetchClassLevel(state: typeof graphState.State) {
   console.log("Node Visited: [fetchClassLevel]");
