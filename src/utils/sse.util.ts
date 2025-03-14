@@ -7,6 +7,11 @@ export function setupSSE(res: Response) {
   res.flushHeaders();
 }
 
-export function sendEvent(res: Response, data: unknown) {
+export type SendDataType = {
+  type: "agent" | "end" | "error";
+  content?: unknown;
+};
+
+export function sendEvent(res: Response, data: SendDataType) {
   res.write(`data: ${JSON.stringify(data)}\n\n`);
 }

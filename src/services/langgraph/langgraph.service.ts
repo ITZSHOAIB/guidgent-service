@@ -1,12 +1,12 @@
-import { START, StateGraph } from "@langchain/langgraph";
+import {
+  InMemoryStore,
+  MemorySaver,
+  START,
+  StateGraph,
+} from "@langchain/langgraph";
 import { HumanMessage } from "@langchain/core/messages";
 import { graphState } from "./graphState";
 import { GRAPH_NODES, GRAPH_NODES_KEYS } from "./nodes";
-
-export type SendDataType = {
-  type: "chat" | "end" | "error";
-  text?: string;
-};
 
 const {
   askClassLevel,
@@ -17,39 +17,37 @@ const {
   clarifyIntent,
 } = GRAPH_NODES;
 
-// In-memory store
-const memory = new Map<string, typeof graphState.State>();
+const checkpointer = new MemorySaver();
+const memoryStore = new InMemoryStore();
 
 const graph = new StateGraph(graphState)
   .addNode(GRAPH_NODES_KEYS.fetchClassLevel, fetchClassLevel, {
     ends: [GRAPH_NODES_KEYS.askClassLevel, GRAPH_NODES_KEYS.evaluateIntent],
   })
-  .addNode(GRAPH_NODES_KEYS.askClassLevel, (state) =>
-    askClassLevel(state, globalSendData)
-  )
-  .addNode(GRAPH_NODES_KEYS.promptSyllabus, (state) =>
-    promptSyllabus(state, globalSendData)
-  )
+  .addNode(GRAPH_NODES_KEYS.askClassLevel, askClassLevel)
+  .addNode(GRAPH_NODES_KEYS.promptSyllabus, promptSyllabus)
   .addNode(GRAPH_NODES_KEYS.evaluateIntent, evaluateIntent)
-  .addNode(GRAPH_NODES_KEYS.clarifyIntent, (state) =>
-    clarifyIntent(state, globalSendData)
-  )
+  .addNode(GRAPH_NODES_KEYS.clarifyIntent, clarifyIntent)
   .addConditionalEdges(START, entryRouter)
-  .compile();
+  .compile({ checkpointer, store: memoryStore });
 
-let globalSendData: (data: SendDataType) => void = () => {};
-export const invokeGraph = async (
-  prompt: string,
-  sendData: (data: SendDataType) => void
-) => {
-  globalSendData = sendData;
-
-  const currentState = memory.get("sessionId") || {
+export async function* invokeGraph(prompt: string) {
+  const config = {
+    configurable: {
+      thread_id: "1234",
+    },
+  };
+  const currentState = {
     messages: [],
     classLevel: -1,
-  };
+  } as typeof graphState.State;
   currentState.messages.push(new HumanMessage(prompt));
 
-  const updatedState = await graph.invoke(currentState);
-  memory.set("sessionId", updatedState);
-};
+  for await (const chunk of await graph.stream(currentState, {
+    streamMode: "custom",
+    ...config,
+  })) {
+    console.log("Chunk", chunk);
+    yield chunk;
+  }
+}

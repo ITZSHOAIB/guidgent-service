@@ -9,7 +9,8 @@ export const graphState = Annotation.Root({
     default: () => [],
   }),
   classLevel: Annotation<ClassLevel>({
-    reducer: (left: ClassLevel, right: ClassLevel) => right,
+    reducer: (left: ClassLevel, right: ClassLevel) =>
+      left === -1 ? right : left,
     default: () => -1,
   }),
 });

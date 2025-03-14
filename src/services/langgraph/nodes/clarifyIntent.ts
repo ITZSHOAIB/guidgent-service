@@ -1,15 +1,15 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import type { graphState } from "../graphState";
-import type { SendDataType } from "../langgraph.service";
 import { model } from "../models";
 import { StringOutputParser } from "@langchain/core/output_parsers";
 import { clarifyIntentPrompt } from "../prompts/clarifyIntent.prompt";
 import { AIMessage } from "@langchain/core/messages";
 import { querySyllabus } from "../../llamaindex/llamaindex.service";
+import type { LangGraphRunnableConfig } from "@langchain/langgraph";
 
 export async function clarifyIntent(
   state: typeof graphState.State,
-  sendData: (data: SendDataType) => void
+  config: LangGraphRunnableConfig
 ) {
   console.log("Node Visited: [clarifyIntent]");
 
@@ -36,11 +36,10 @@ export async function clarifyIntent(
     retrievedSyllabusChunks,
   })) {
     fullResponse += chunk;
-    sendData({ type: "chat", text: chunk });
+    config.writer?.(chunk);
   }
-  sendData({ type: "end" });
 
   return {
-    messages: [...state.messages, new AIMessage(fullResponse)],
+    messages: [new AIMessage(fullResponse)],
   };
 }

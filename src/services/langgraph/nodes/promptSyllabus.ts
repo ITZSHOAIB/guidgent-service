@@ -1,13 +1,14 @@
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import type { graphState } from "../graphState";
-import type { SendDataType } from "../langgraph.service";
+import { dispatchCustomEvent } from "@langchain/core/callbacks/dispatch";
 import { promptSyllabusPrompt } from "../prompts/promptSyllabus.prompt";
 import { querySyllabus } from "../../llamaindex/llamaindex.service";
 import { AIMessage } from "@langchain/core/messages";
+import type { LangGraphRunnableConfig } from "@langchain/langgraph";
 
 export async function promptSyllabus(
   state: typeof graphState.State,
-  sendData: (data: SendDataType) => void
+  config: LangGraphRunnableConfig
 ) {
   console.log("Node Visited: [promptSyllabus]");
 
@@ -28,12 +29,11 @@ export async function promptSyllabus(
 
   let fullResponse = "";
   for await (const chunk of response) {
-    sendData({ type: "chat", text: chunk.delta });
     fullResponse += chunk.message.content;
+    config.writer?.(chunk.message.content);
   }
-  sendData({ type: "end" });
 
   return {
-    messages: [...state.messages, new AIMessage(fullResponse)],
+    messages: [new AIMessage(fullResponse)],
   };
 }

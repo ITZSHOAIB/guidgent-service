@@ -6,9 +6,11 @@ export const handleEvents = (req: Request, res: Response) => {
   setupSSE(res);
 
   const handleMessage = async (message: { text: string }) => {
-    await invokeGraph(message.text, (data) => {
-      sendEvent(res, data);
-    });
+    for await (const response of invokeGraph(message.text)) {
+      console.log("Graph response", response);
+      sendEvent(res, { type: "agent", content: response });
+    }
+    sendEvent(res, { type: "end" });
   };
 
   req.on("close", () => {
