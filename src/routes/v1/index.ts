@@ -1,8 +1,8 @@
 import express from "express";
-import chatRoute from "./chat.route";
+import agentRoute from "./agent.route";
 
 const router = express.Router();
 
-router.use("/chat", chatRoute);
+router.use("/agent", agentRoute);
 
 export default router;
