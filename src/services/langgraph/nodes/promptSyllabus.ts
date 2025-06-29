@@ -13,15 +13,29 @@ export async function promptSyllabus(
 
   const messages = state.messages;
   const humanMessages = messages.filter((msg) => msg.getType() === "human");
+  const lastMessage = humanMessages[humanMessages.length - 1].content;
+
+  const conversationHistory = state.messages
+    .map(
+      (msg) =>
+        `${
+          msg.getType() === "human" ? "Student" : "Assistant"
+        }: ${msg.content.toString()}`
+    )
+    .join("\n");
 
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", promptSyllabusPrompt()],
-    ["human", "{message}"],
+    [
+      "human",
+      "Previous conversation:\n{conversationHistory}\n\nCurrent query: {message}",
+    ],
   ]);
 
   const query = await prompt.invoke({
     classLevel: state.classLevel,
-    message: humanMessages[humanMessages.length - 1].content,
+    message: lastMessage,
+    conversationHistory,
   });
 
   const response = await querySyllabus(query.toString());

@@ -31,16 +31,45 @@ const graph = new StateGraph(graphState)
   .addConditionalEdges(START, entryRouter)
   .compile({ checkpointer, store: memoryStore });
 
-export async function* invokeGraph(prompt: string) {
+export async function* invokeGraph(
+  prompt: string,
+  sessionId: string = "default"
+) {
   const config = {
     configurable: {
-      thread_id: "1234",
+      thread_id: sessionId,
     },
   };
-  const currentState = {
-    messages: [],
-    classLevel: -1,
-  } as typeof graphState.State;
+
+  let currentState: typeof graphState.State;
+
+  try {
+    const existingState = await graph.getState(config);
+    if (existingState.values && typeof existingState.values === "object") {
+      currentState = existingState.values;
+      if (!currentState.messages || !Array.isArray(currentState.messages)) {
+        currentState.messages = [];
+      }
+      if (currentState.classLevel === undefined) {
+        currentState.classLevel = -1;
+      }
+    } else {
+      currentState = {
+        messages: [],
+        classLevel: -1,
+      } as typeof graphState.State;
+    }
+  } catch (error) {
+    console.log(
+      `Creating new state for session ${sessionId}:`,
+      error instanceof Error ? error.message : String(error)
+    );
+    currentState = {
+      messages: [],
+      classLevel: -1,
+    } as typeof graphState.State;
+  }
+
   currentState.messages.push(new HumanMessage(prompt));
 
   for await (const chunk of await graph.stream(currentState, {

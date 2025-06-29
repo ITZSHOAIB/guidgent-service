@@ -23,9 +23,21 @@ export async function clarifyIntent(
     false
   );
 
+  const conversationHistory = state.messages
+    .map(
+      (msg) =>
+        `${
+          msg.getType() === "human" ? "Student" : "Assistant"
+        }: ${msg.content.toString()}`
+    )
+    .join("\n");
+
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", clarifyIntentPrompt()],
-    ["human", "{message}"],
+    [
+      "human",
+      "Previous conversation:\n{conversationHistory}\n\nCurrent message: {message}",
+    ],
   ]);
   const chain = prompt.pipe(model).pipe(new StringOutputParser());
 
@@ -33,6 +45,7 @@ export async function clarifyIntent(
   for await (const chunk of await chain.stream({
     classLevel: state.classLevel,
     message: lastMessage,
+    conversationHistory,
     retrievedSyllabusChunks,
   })) {
     fullResponse += chunk;

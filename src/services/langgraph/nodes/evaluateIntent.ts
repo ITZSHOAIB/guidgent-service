@@ -14,15 +14,28 @@ export async function evaluateIntent(state: typeof graphState.State) {
   );
   const lastMessage = humanMessages[humanMessages.length - 1].content;
 
+  const conversationHistory = state.messages
+    .map(
+      (msg) =>
+        `${
+          msg.getType() === "human" ? "Student" : "Assistant"
+        }: ${msg.content.toString()}`
+    )
+    .join("\n");
+
   const prompt = ChatPromptTemplate.fromMessages([
     ["system", evaluateIntentPrompt()],
-    ["human", "{message}"],
+    [
+      "human",
+      "Previous conversation:\n{conversationHistory}\n\nCurrent message to evaluate: {message}",
+    ],
   ]);
   const chain = prompt.pipe(model).pipe(new StringOutputParser());
 
   const response = await chain.invoke({
     classLevel: state.classLevel,
     message: lastMessage,
+    conversationHistory,
   });
 
   const isSufficient = +response === 1;

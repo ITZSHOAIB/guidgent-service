@@ -23,18 +23,12 @@ importers:
       '@llamaindex/core':
         specifier: ^0.5.8
         version: 0.5.8(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)
-      '@llamaindex/groq':
-        specifier: ^0.0.56
-        version: 0.0.56(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)
       '@llamaindex/huggingface':
         specifier: ^0.0.41
         version: 0.0.41(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)
       '@llamaindex/mistral':
         specifier: ^0.0.10
         version: 0.0.10(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(zod@3.24.2)
-      '@llamaindex/ollama':
-        specifier: ^0.0.45
-        version: 0.0.45(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)
       '@llamaindex/readers':
         specifier: ^2.0.8
         version: 2.0.8(@llamaindex/core@0.5.8(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0))(@llamaindex/env@0.1.29(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0))
@@ -44,9 +38,6 @@ importers:
       agentic-express:
         specifier: ^0.0.2
         version: 0.0.2(express@4.21.2)(openai@4.87.3(ws@8.18.1)(zod@3.24.2))(typescript@5.8.2)(ws@8.18.1)
-      axios:
-        specifier: ^1.8.3
-        version: 1.8.3
       cors:
         specifier: ^2.8.5
         version: 2.8.5
@@ -366,9 +357,6 @@ packages:
       gpt-tokenizer:
         optional: true
 
-  '@llamaindex/groq@0.0.56':
-    resolution: {integrity: sha512-XuPAbXcuD/WKk9ui/P1Amlqh/DchopFGPbvBGgeMKoWCwA029a72ivjzLEeqtDfQBu1WtdMHF/nx2qbU4ptphg==}
-
   '@llamaindex/huggingface@0.0.41':
     resolution: {integrity: sha512-TmGjM1u+DfNMsDfUWXQJyJBRqEmWva88UKEEa+a9HwMNbid0dTeSpin3vElFT7OBYGnfYQ4ElBpMzfIgriPCew==}
     peerDependencies:
@@ -384,9 +372,6 @@ packages:
       '@llamaindex/env': 0.1.29
       tree-sitter: ^0.22.0
       web-tree-sitter: ^0.24.3
-
-  '@llamaindex/ollama@0.0.45':
-    resolution: {integrity: sha512-7YwjVeyplXCjluvhcx5zZq9qIRLAyMiyWJEd2/M8fHEEU3+03fGe+VHRzjiDR9ZE6UrjGN1iIDGoKp2o6h/5GA==}
 
   '@llamaindex/openai@0.1.57':
     resolution: {integrity: sha512-3jQjT7XpQgVHWHws977A1dQVeeqeXp/1AE/eyjdomZElHstuGRc4ZDVRPpn1FcH05Lk6Ft4c+sN/2btMzg6msg==}
@@ -656,9 +641,6 @@ packages:
 
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
-
-  axios@1.8.3:
-    resolution: {integrity: sha512-iP4DebzoNlP/YN2dpwCgb8zoCmhtkajzS48JvwmkSkXvPI3DHc7m+XYL5tGnSlJtR6nImXZmdCuN5aP8dh1d8A==}
 
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
@@ -946,15 +928,6 @@ packages:
   flatbuffers@25.2.10:
     resolution: {integrity: sha512-7JlN9ZvLDG1McO3kbX0k4v+SUAg48L1rIwEvN6ZQl/eCtgJz9UylTMzE9wrmYrcorgxm3CX/3T/w5VAub99UUw==}
 
-  follow-redirects@1.15.9:
-    resolution: {integrity: sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-
   foreground-child@3.3.1:
     resolution: {integrity: sha512-gIXjKqtFuWEgzFRJA9WCQeSJLZDjgJUOMCMzxtvFq/37KojM1BFGufqsCy0r4qSQmYLsZYMeyRqzIWOMup03sw==}
     engines: {node: '>=14'}
@@ -1024,9 +997,6 @@ packages:
 
   gpt-tokenizer@2.9.0:
     resolution: {integrity: sha512-YSpexBL/k4bfliAzMrRqn3M6+it02LutVyhVpDeMKrC/O9+pCe/5s8U2hYKa2vFLD5/vHhsKc8sOn/qGqII8Kg==}
-
-  groq-sdk@0.8.0:
-    resolution: {integrity: sha512-hSgCjZCkoM4CY/TWfsaNlh512svWRR2td4HGpmEV8MbVEVrxZARJq5BHt8gbEF9Gex092/X7VJvaQpha0dIC8g==}
 
   guid-typescript@1.0.9:
     resolution: {integrity: sha512-Y8T4vYhEfwJOTbouREvG+3XDsjr8E3kIr7uf+JZ0BYloFsttiHU0WfvANVsR7TxNUJa/WpCnw/Ino/p+DeBhBQ==}
@@ -1362,9 +1332,6 @@ packages:
     resolution: {integrity: sha512-W67iLl4J2EXEGTbfeHCffrjDfitvLANg0UlX3wFUUSTx92KXRFegMHUVgSqE+wvhAbi4WqjGg9czysTV2Epbew==}
     engines: {node: '>= 0.4'}
 
-  ollama@0.5.14:
-    resolution: {integrity: sha512-pvOuEYa2WkkAumxzJP0RdEYHkbZ64AYyyUszXVX7ruLvk5L+EiO2G71da2GqEQ4IAk4j6eLoUbGk5arzFT1wJA==}
-
   on-finished@2.4.1:
     resolution: {integrity: sha512-oVlzkg3ENAhCk2zdv7IJwd/QUD4z2RxRwpkcGY8psCVcCYZNq4wYnVWALHM+brtuJjePWiYF/ClmuDr8Ch5+kg==}
     engines: {node: '>= 0.8'}
@@ -1474,9 +1441,6 @@ packages:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
 
-  proxy-from-env@1.1.0:
-    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
-
   pstree.remy@1.1.8:
     resolution: {integrity: sha512-77DZwxQmxKnu3aR542U+X8FypNzbfJ+C5XQDk3uWjWxn6151aIMGthWYRXTqT1E5oJvg+ljaa2OJi+VfvCOQ8w==}
 
@@ -1506,9 +1470,6 @@ packages:
   readdirp@3.6.0:
     resolution: {integrity: sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==}
     engines: {node: '>=8.10.0'}
-
-  remeda@2.21.2:
-    resolution: {integrity: sha512-wdhkMDou8HRpD7RnxKJ/FHJWEGXRH7jV/pb0NsdLLSoBo+G9RjtxcY41hVhogLfEMkThk6aySKjs+Yd6PnpzBA==}
 
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
@@ -1707,10 +1668,6 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  type-fest@4.37.0:
-    resolution: {integrity: sha512-S/5/0kFftkq27FPNye0XM1e2NsnoD/3FS+pBmbjmmtLT6I+i344KoOf7pvXreaFsDamWeaJX55nczA1m5PsBDg==}
-    engines: {node: '>=16'}
-
   type-is@1.6.18:
     resolution: {integrity: sha512-TkRKr9sUTxEH8MdfuCSP7VizJyzRNMjj2J2do2Jr3Kym598JVdEksuzPQCnlFPW4ky9Q+iA+ma9BGm06XQBy8g==}
     engines: {node: '>= 0.6'}
@@ -1778,9 +1735,6 @@ packages:
   webidl-conversions@7.0.0:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
-
-  whatwg-fetch@3.6.20:
-    resolution: {integrity: sha512-EqhiFU6daOA8kpjOWTL0olhVOF3i7OrFzSYiGsEMB8GcXS+RrzauAERX65xMeNWVqxA6HXH2m69Z9LaKKdisfg==}
 
   whatwg-url@14.1.1:
     resolution: {integrity: sha512-mDGf9diDad/giZ/Sm9Xi2YcyzaFpbdLpJPr+E9fSkyQ7KpQD4SdFcugkRQYzhmfI4KeV4Qpnn2sKPdo+kmsgRQ==}
@@ -2163,22 +2117,6 @@ snapshots:
       '@huggingface/transformers': 3.4.0
       gpt-tokenizer: 2.9.0
 
-  '@llamaindex/groq@0.0.56(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)':
-    dependencies:
-      '@llamaindex/env': 0.1.28(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)
-      '@llamaindex/openai': 0.1.57(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)
-      groq-sdk: 0.8.0
-    transitivePeerDependencies:
-      - '@aws-crypto/sha256-js'
-      - '@huggingface/transformers'
-      - encoding
-      - gpt-tokenizer
-      - js-tiktoken
-      - pathe
-      - tiktoken
-      - ws
-      - zod
-
   '@llamaindex/huggingface@0.0.41(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)':
     dependencies:
       '@huggingface/inference': 2.8.1
@@ -2217,20 +2155,6 @@ snapshots:
       html-to-text: 9.0.5
       tree-sitter: 0.22.4
       web-tree-sitter: 0.24.7
-
-  '@llamaindex/ollama@0.0.45(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)':
-    dependencies:
-      '@llamaindex/core': 0.5.5(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)
-      '@llamaindex/env': 0.1.28(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)
-      ollama: 0.5.14
-      remeda: 2.21.2
-    transitivePeerDependencies:
-      - '@aws-crypto/sha256-js'
-      - '@huggingface/transformers'
-      - gpt-tokenizer
-      - js-tiktoken
-      - pathe
-      - tiktoken
 
   '@llamaindex/openai@0.1.57(@aws-crypto/sha256-js@5.2.0)(@huggingface/transformers@3.4.0)(gpt-tokenizer@2.9.0)(js-tiktoken@1.0.19)(pathe@1.1.2)(ws@8.18.1)(zod@3.24.2)':
     dependencies:
@@ -2558,14 +2482,6 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.8.3:
-    dependencies:
-      follow-redirects: 1.15.9
-      form-data: 4.0.2
-      proxy-from-env: 1.1.0
-    transitivePeerDependencies:
-      - debug
-
   balanced-match@1.0.2: {}
 
   base64-js@1.5.1: {}
@@ -2872,8 +2788,6 @@ snapshots:
 
   flatbuffers@25.2.10: {}
 
-  follow-redirects@1.15.9: {}
-
   foreground-child@3.3.1:
     dependencies:
       cross-spawn: 7.0.6
@@ -2967,18 +2881,6 @@ snapshots:
   gopd@1.2.0: {}
 
   gpt-tokenizer@2.9.0: {}
-
-  groq-sdk@0.8.0:
-    dependencies:
-      '@types/node': 18.19.80
-      '@types/node-fetch': 2.6.12
-      abort-controller: 3.0.0
-      agentkeepalive: 4.6.0
-      form-data-encoder: 1.7.2
-      formdata-node: 4.4.1
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
 
   guid-typescript@1.0.9: {}
 
@@ -3309,10 +3211,6 @@ snapshots:
 
   object-inspect@1.13.4: {}
 
-  ollama@0.5.14:
-    dependencies:
-      whatwg-fetch: 3.6.20
-
   on-finished@2.4.1:
     dependencies:
       ee-first: 1.1.1
@@ -3429,8 +3327,6 @@ snapshots:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
-  proxy-from-env@1.1.0: {}
-
   pstree.remy@1.1.8: {}
 
   punycode@2.3.1: {}
@@ -3468,10 +3364,6 @@ snapshots:
   readdirp@3.6.0:
     dependencies:
       picomatch: 2.3.1
-
-  remeda@2.21.2:
-    dependencies:
-      type-fest: 4.37.0
 
   require-from-string@2.0.2: {}
 
@@ -3725,8 +3617,6 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  type-fest@4.37.0: {}
-
   type-is@1.6.18:
     dependencies:
       media-typer: 0.3.0
@@ -3772,8 +3662,6 @@ snapshots:
   webidl-conversions@3.0.1: {}
 
   webidl-conversions@7.0.0: {}
-
-  whatwg-fetch@3.6.20: {}
 
   whatwg-url@14.1.1:
     dependencies:

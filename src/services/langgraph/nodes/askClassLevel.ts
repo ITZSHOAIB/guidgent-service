@@ -6,7 +6,14 @@ export async function askClassLevel(
   config: LangGraphRunnableConfig
 ) {
   console.log("Node Visited: [askClassLevel]");
-  config.writer?.(
-    "Hello! To provide you with the most relevant information, could you please tell me if you are in class 9 or 10?"
-  );
+
+  let message =
+    "Hello! To provide you with the most relevant information, could you please tell me if you are in class 9 or 10?";
+
+  if (state.messages.length > 1) {
+    message =
+      "I see we're continuing our conversation. To provide you with the most relevant information from the CBSE mathematics syllabus, could you please tell me if you are in class 9 or 10?";
+  }
+
+  config.writer?.(message);
 }
